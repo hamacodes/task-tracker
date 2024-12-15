@@ -6,7 +6,20 @@ import os
 TASKS_FILE = "tasks.json"
 
 def load_tasks():
-    pass
+    """Load tasks from the JSON file"""
+    if not os.path.exists(TASKS_FILE)
+        # File does not exist, create an empty file
+        with open(TASKS_FILE, "w") as file:
+            json.dump([], file) # Write empty list to the file
+
+        
+    # File does exist:
+    with open(TASKS_FILE, "r") as file:
+        try:
+            tasks = json.load(file)
+            return tasks
+        except json.JSONDecodeError:
+            return [] # File is invalid, return empty list
 
 
 
