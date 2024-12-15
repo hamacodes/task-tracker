@@ -1,4 +1,15 @@
 import sys
+import json
+import os
+
+
+TASKS_FILE = "tasks.json"
+
+def load_tasks():
+    pass
+
+
+
 
 
 def main():
