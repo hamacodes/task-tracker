@@ -14,6 +14,9 @@ def main():
             print("Error: Missing task description for 'add'.")
         else:
             add_task(args[0])
+    elif command == "list":
+        status = args[0] if args else None # Optional status arg
+        list_tasks(status)
     else:
         print(f"Error: Unknown command '{command}'.")
 
