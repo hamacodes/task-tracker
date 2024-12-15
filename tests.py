@@ -1,51 +1,71 @@
+import unittest
 import os
 import json
 from main import load_tasks, save_tasks
 
 TEST_FILE = "test_tasks.json"
 
-# Override the load_tasks and save_tasks to use the test file
+
 def load_test_tasks():
     """Load tasks from the test JSON file."""
     if not os.path.exists(TEST_FILE):
         with open(TEST_FILE, "w") as file:
-            json.dump([], file)  # Create an empty test file
+            json.dump([], file)
     with open(TEST_FILE, "r") as file:
-        try:
-            return json.load(file)
-        except json.JSONDecodeError:
-            return []
+        return json.load(file)
 
 def save_test_tasks(tasks):
     """Save tasks to the test JSON file."""
     with open(TEST_FILE, "w") as file:
         json.dump(tasks, file, indent=4)
 
-# Test function
-def test():
-    print("Testing JSON File Management...")
-    tasks = load_test_tasks()
-    print("Loaded tasks:", tasks)
+class TestTaskManagement(unittest.TestCase):
+    def setUp(self):
+        """Set up a fresh test file before each test."""
+        with open(TEST_FILE, "w") as file:
+            json.dump([], file)
 
-    # Add a test task
-    tasks.append({
-        "id": 1,
-        "description": "Test task",
-        "status": "todo",
-        "createdAt": "2024-06-10 12:00:00",
-        "updatedAt": "2024-06-10 12:00:00"
-    })
+    def tearDown(self):
+        """Clean up the test file after each test."""
+        if os.path.exists(TEST_FILE):
+            os.remove(TEST_FILE)
 
-    save_test_tasks(tasks)
-    print("Task saved successfully!")
+    def test_load_empty_tasks(self):
+        """Test loading tasks when the file is empty."""
+        tasks = load_test_tasks()
+        self.assertEqual(tasks, [], "The task list should be empty initially.")
 
-    # Reload and check
-    updated_tasks = load_test_tasks()
-    print("Updated tasks:", updated_tasks)
+    def test_save_and_load_tasks(self):
+        """Test saving tasks and reloading them."""
+        test_data = [
+            {
+                "id": 1,
+                "description": "Test Task 1",
+                "status": "todo",
+                "createdAt": "2024-06-10 12:00:00",
+                "updatedAt": "2024-06-10 12:00:00"
+            }
+        ]
+        save_test_tasks(test_data)
+        loaded_tasks = load_test_tasks()
+        self.assertEqual(loaded_tasks, test_data, "The loaded tasks should match the saved tasks.")
 
-    # Clean up the test file after running
-    os.remove(TEST_FILE)
-    print("Test file cleaned up.")
+    def test_append_task(self):
+        """Test appending a task and saving it."""
+        tasks = load_test_tasks()
+        new_task = {
+            "id": 2,
+            "description": "Test Task 2",
+            "status": "in-progress",
+            "createdAt": "2024-06-10 12:05:00",
+            "updatedAt": "2024-06-10 12:05:00"
+        }
+        tasks.append(new_task)
+        save_test_tasks(tasks)
+        
+        # Verify the task was saved
+        loaded_tasks = load_test_tasks()
+        self.assertIn(new_task, loaded_tasks, "The new task should be in the task list.")
 
 if __name__ == "__main__":
-    test()
+    unittest.main()
