@@ -1,5 +1,5 @@
 import sys
-from task_manager import add_task
+from task_manager import add_task, list_tasks
 
 def main():
     if len(sys.argv) < 2:
