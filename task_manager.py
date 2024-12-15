@@ -38,8 +38,8 @@ def add_task(description):
         "id": new_id,
         "description": description,
         "status": "todo",
-        "createdAt": datetime.datetime.now().isoformat(),
-        "updatedAt": datetime.datetime.now().isoformat()
+        "createdAt": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "updatedAt": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     }
 
     tasks.append(new_task)
