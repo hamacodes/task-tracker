@@ -37,3 +37,7 @@ def main():
             print(f"Command: {command} | ID: {args[0]}")
     else:
         print(f"Error: Unknown command '{command}'.")
+
+
+if __name__ == "__main__":
+    main()
