@@ -1,7 +1,5 @@
 # Project specific files
-tasks.json
-
-
+*.json
 
 
 # Byte-compiled / optimized / DLL files
