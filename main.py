@@ -7,7 +7,7 @@ TASKS_FILE = "tasks.json"
 
 def load_tasks():
     """Load tasks from the JSON file"""
-    if not os.path.exists(TASKS_FILE)
+    if not os.path.exists(TASKS_FILE):
         # File does not exist, create an empty file
         with open(TASKS_FILE, "w") as file:
             json.dump([], file) # Write empty list to the file
