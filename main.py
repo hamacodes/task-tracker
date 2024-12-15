@@ -21,7 +21,10 @@ def load_tasks():
         except json.JSONDecodeError:
             return [] # File is invalid, return empty list
 
-
+def save_tasks(tasks):
+    """Savee tasks to the JSON file."""
+    with open(TASKS_FILE, "w") as file:
+        json.dump(tasks, file, indent=4)
 
 
 
