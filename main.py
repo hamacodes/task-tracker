@@ -1,5 +1,5 @@
 import sys
-from task_manager import add_task, list_tasks, update_task, delete_task, update_task_status
+from task_manager import add_task, list_tasks, update_task, delete_task, update_task_status, print_help
 
 def main():
     if len(sys.argv) < 2:
@@ -36,6 +36,7 @@ def main():
 
     else:
         print(f"Error: Unknown command '{command}'.")
+        print_help()
 
 if __name__ == "__main__":
     main()

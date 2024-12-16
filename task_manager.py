@@ -147,3 +147,20 @@ def update_task_status(task_id, new_status):
     
     # ID not found
     print(f"Error: Task ID {task_id} not found.")
+
+def print_help():
+    print("""
+Task Tracker CLI - Usage:
+    add "<description>"          Add a new task
+    list [status]                List all tasks or filter by status (todo, in-progress, done)
+    update <id> "<description>"  Update the description of a task
+    delete <id>                  Delete a task
+    status <id> <new_status>     Update task status (todo, in-progress, done)
+
+Examples:
+    python main.py add "Finish the project"
+    python main.py list in-progress
+    python main.py update 1 "Write documentation"
+    python main.py delete 1
+    python main.py status 2 done
+    """)
