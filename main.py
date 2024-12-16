@@ -1,5 +1,5 @@
 import sys
-from task_manager import add_task, list_tasks
+from task_manager import add_task, list_tasks, update_task
 
 def main():
     if len(sys.argv) < 2:
@@ -14,9 +14,17 @@ def main():
             print("Error: Missing task description for 'add'.")
         else:
             add_task(args[0])
+    
     elif command == "list":
         status = args[0] if args else None # Optional status arg
         list_tasks(status)
+    
+    elif command == "update":
+        if len(args) < 2:
+            print("Error: Missing arguments for 'update'. Usage: update <id> <new description>")
+        else:
+            update_task(args[0], args[1])
+
     else:
         print(f"Error: Unknown command '{command}'.")
 
