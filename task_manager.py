@@ -45,6 +45,7 @@ def add_task(description):
     tasks.append(new_task)
     save_tasks(tasks)
     print(f"Task added successfully (ID: {new_id}).")
+    list_tasks()
 
 
 def list_tasks(status=None):
@@ -94,7 +95,31 @@ def update_task(task_id, new_decription):
             task["updatedAt"] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             save_tasks(tasks)
             print(f"Task ID {task_id} updated successfully.")
+            list_tasks()
             return
     
     # Reaching here indicates ID was not found
+    print(f"Error: Task with ID {task_id} not found.")
+
+
+def delete_task(task_id):
+    """
+    Delete a task from the list of tasks.
+
+    Args:
+        task_id (int): The ID of the task to delete.
+    """
+
+    tasks = load_tasks()
+
+    # Find and delete the task
+    for task in tasks:
+        if task["id"] == int(task_id):
+            tasks.remove(task)
+            save_tasks(tasks)
+            print(f"Task ID {task_id} deleted successfully")
+            list_tasks()
+            return
+
+    # Not found
     print(f"Error: Task with ID {task_id} not found.")
