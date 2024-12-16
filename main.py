@@ -32,7 +32,7 @@ def main():
         if len(args) < 2:
             print("Error: Missing arguments for 'status'. Usage: status <id> < new status>")
         else:
-            update_task_status(args[0], args[0])
+            update_task_status(args[0], args[1])
 
     else:
         print(f"Error: Unknown command '{command}'.")
