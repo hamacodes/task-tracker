@@ -1,5 +1,5 @@
 import sys
-from task_manager import add_task, list_tasks, update_task, delete_task
+from task_manager import add_task, list_tasks, update_task, delete_task, update_task_status
 
 def main():
     if len(sys.argv) < 2:
@@ -27,6 +27,13 @@ def main():
 
     elif command == "delete":
         delete_task(args[0])
+
+    elif command == "status":
+        if len(args) < 2:
+            print("Error: Missing arguments for 'status'. Usage: status <id> < new status>")
+        else:
+            update_task_status(args[0], args[0])
+            list_tasks()
 
     else:
         print(f"Error: Unknown command '{command}'.")

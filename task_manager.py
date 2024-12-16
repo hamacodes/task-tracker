@@ -123,3 +123,24 @@ def delete_task(task_id):
 
     # Not found
     print(f"Error: Task with ID {task_id} not found.")
+
+
+def update_task_status(task_id, status):
+    """
+    Update the status of a task (todo, in-progress, done).
+
+    Args:
+        task_id (int): The ID of the task whose status is to change.
+        status (str): The status the task should hold.
+    """
+
+    tasks = load_tasks()
+
+
+    for task in tasks:
+        if task["id"] == task_id:
+            task["status"] = status
+            return
+    
+    # ID not found
+    print(f"Error: Task ID {task_id} not found.")
