@@ -74,3 +74,27 @@ def list_tasks(status=None):
     for task in filtered_tasks:
         print(f"{task['id']:<5} {task['description']:<30} {task['status']:<12} {task['createdAt']}")
     print()
+
+
+def update_task(task_id, new_decription):
+    """
+    Update the description of a task.
+
+    Args:
+        task_id (int): The ID of the task to update.
+        new_description (str): The new task description.
+    """
+
+    tasks = load_tasks()
+
+    # Search for the task by ID:
+    for task in tasks:
+        if task["id"] == int(task_id):
+            task["description"] = new_decription
+            task["updatedAt"] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            save_tasks(tasks)
+            print(f"Task ID {task_id} updated successfully.")
+            return
+    
+    # Reaching here indicates ID was not found
+    print(f"Error: Task with ID {task_id} not found.")
